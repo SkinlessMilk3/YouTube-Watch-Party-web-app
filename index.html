@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+    <!--<script id = "apiKey" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLTfxK7xFrVC4Wl8N-tpBS1Wrvo5sktlU&callback=initMap"></script>-->
+    <!--<script src="https://apis.google.com/js/client.js?onload=init"></script>-->
+    <div>
+        <h2 id="test">test</h2>
+    </div>
+    
+    
+    <div>
+        <input type="text" id="searchbar" placeholder="Search...">
+    </div>
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player"></div>
+
+    <div><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16" style="
+    float: left;
+">
+            <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"></path>
+        </svg>
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-pause" viewBox="0 0 16 16" style="
+    float: left;
+">
+            <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"></path>
+        </svg>
+    </div>
+    <div>
+        
+        <div id="progress_bar" style="width: 576px;
+                                    height: 32px;
+                                    background-color: black;
+                                    float: left;
+                                    ">
+            <div id="slider" style="
+                                    height: 32px;
+                                    width: 15px;
+                                    background-color: grey;
+                                    position: fixed;">
+            </div>
+        </div>
+    
+    </div>
+    <!--<script src="YouTube Data.js"></script>-->
+    <script src="VideoPlayer.js"></script>
+    <script src="init.js"></script>
+</body>
+</html>
