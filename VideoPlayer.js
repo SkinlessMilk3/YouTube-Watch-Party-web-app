@@ -1,3 +1,4 @@
+
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
 
@@ -7,7 +8,7 @@
 
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
-      var player;
+      var player
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
           
@@ -27,7 +28,14 @@
 
       // 4. The API will call this function when the video player is ready.
       function onPlayerReady(event) {
+        playerReady = true
         event.target.playVideo();
+        var buffer = document.getElementById("buffer")
+        buffer.max = player.getDuration()
+
+        pauseVideoInit()
+        playVideoInit()
+        bufferSeekInit()
       }
 
       // 5. The API calls this function when the player's state changes.
@@ -40,10 +48,35 @@
           done = true;
         }
       }
-      function stopVideo() {
-        player.stopVideo();
+
+      function stopVideoInit() {
+        /*document.getElementById("pauseBtn").addEventListener("click", ev => {
+          player.stopVideo()
+        })*/
+      }
+      const pauseVideoInit = function(){
+        document.getElementById("pauseBtn").addEventListener("click", ev => {
+          player.pauseVideo()
+        })
       }
 
+      const playVideoInit = function (){
+        document.getElementById("playBtn").addEventListener("click", ev => {
+          player.playVideo()
+        })
+      }
+      const bufferSeekInit = function(){
+        
+        document.getElementById("buffer").addEventListener("change", ev => {
+          player.seekTo(ev.currentTarget.value, true)
+        })
+
+        document.getElementById("buffer").addEventListener("input", ev => {
+          player.seekTo(ev.currentTarget.value, false)
+        })
+      }
+      //used to change video
       function UpdateVideo(videoId){
+        
         player.videoId = videoId
       }
