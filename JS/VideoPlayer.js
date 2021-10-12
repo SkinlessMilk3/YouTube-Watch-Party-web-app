@@ -9,6 +9,7 @@
       // 3. This function creates an <iframe> (and YouTube player)
       //    after the API code downloads.
       var player
+      
       function onYouTubeIframeAPIReady() {
         player = new YT.Player('player', {
           
@@ -27,15 +28,39 @@
       }
 
       // 4. The API will call this function when the video player is ready.
+      var socket = io.connect("http://localhost:5000")
       function onPlayerReady(event) {
-        playerReady = true
+
         event.target.playVideo();
         var buffer = document.getElementById("buffer")
         buffer.max = player.getDuration()
-
+        
+        MessageHandlingInit()
         pauseVideoInit()
         playVideoInit()
         bufferSeekInit()
+      }
+
+      const MessageHandlingInit = function(){
+
+        socket.on("play", () => {
+          player.playVideo()
+        })
+
+        socket.on("pause", () => {
+          player.pauseVideo()
+        })
+
+        socket.on("seek", data => {
+          player.seekTo(data, true)
+        })
+
+        socket.on("time query", () => {
+          socket.emit("time synch", player.getCurrentTime())
+        })
+        socket.on("time synch", data => {
+          player.seekTo(data, true)
+        })
       }
 
       // 5. The API calls this function when the player's state changes.
@@ -57,18 +82,21 @@
       const pauseVideoInit = function(){
         document.getElementById("pauseBtn").addEventListener("click", ev => {
           player.pauseVideo()
+          socket.emit("pause")
         })
       }
 
       const playVideoInit = function (){
         document.getElementById("playBtn").addEventListener("click", ev => {
           player.playVideo()
+          socket.emit("play")
         })
       }
       const bufferSeekInit = function(){
         
         document.getElementById("buffer").addEventListener("change", ev => {
           player.seekTo(ev.currentTarget.value, true)
+          socket.emit("seek", ev.currentTarget.value)
         })
 
         document.getElementById("buffer").addEventListener("input", ev => {

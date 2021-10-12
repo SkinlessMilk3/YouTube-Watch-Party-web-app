@@ -1,4 +1,4 @@
-const server = require("./server.js")
+const server = require("./NodeJS/server.js")
 
 const main = function(){
     
