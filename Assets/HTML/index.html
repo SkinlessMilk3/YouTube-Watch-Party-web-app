@@ -5,23 +5,27 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="/CSS/style.css">
+    <link rel="stylesheet" href="style.css">
     
 </head>
 <body>
     
     <!--<script id = "apiKey" async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDLTfxK7xFrVC4Wl8N-tpBS1Wrvo5sktlU&callback=initMap"></script>-->
     <!--<script src="https://apis.google.com/js/client.js?onload=init"></script>-->
-    <div>
-        <h2 id="test">test</h2>
-    </div>
-    
     
     <div>
         <input type="text" id="searchbar" placeholder="Search...">
     </div>
     <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
     <div id="player"></div>
+    
+    <div id="chat_system" style="float: right;">
+        <div id="chat_window" style="float: right;"></div>
+                                    
+        <button  id="sendBtn" style="float: right;">Send</button>
+        <input type="text" id="message" placeholder="message..." style="float: right;">
+        
+    </div>
 
     <div><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-play" viewBox="0 0 16 16" style="
     float: left;" id="playBtn">
@@ -37,19 +41,31 @@
         <input id="buffer" type="range" min="0" max="100" value="0" style="width: 576px;
                                             height: 32px;">
     </div>
-    <div id="chat_system">
-        <div id="chat_window" style="float: right;"></div>
-                                    
-        <button  id="sendBtn" style="float: right;">Send</button>
-        <input type="text" id="message" placeholder="message..." style="float: right;">
-        
-        <input type="text" id="username" placeholder="username..." style="float: right;">
-        
-    </div>
+    
+
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+
+          <form action="" method="POST">
+            <p>Email: <input name="email" type="text" placeholder="JaneDoe@letter.com"></p><p>Username: <input id="username" name="username" type="text">
+                <input type="submit" id="userInfoSubmission" name="userInfoSubmission" value="submit"></p>
+        </form>
+        </div>
+      
+      </div>
+
     <!--<script src="YouTube Data.js"></script>-->
+    
     <script src="/socket.io/socket.io.js"></script>
+    <script>var socket = io().connect("http://localhost:5000")
+                socket.on("Hello", data => {
+                    console.log(data)
+                })</script>
     <script src="VideoPlayer.js"></script>
     <script src="chat.js"></script>
-    <script src="init.js"></script>
+    
 </body>
 </html>

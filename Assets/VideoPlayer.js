@@ -1,7 +1,7 @@
 
       // 2. This code loads the IFrame Player API code asynchronously.
       var tag = document.createElement('script');
-
+      var socket;
       tag.src = "https://www.youtube.com/iframe_api";
       var firstScriptTag = document.getElementsByTagName('script')[0];
       firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
@@ -28,23 +28,23 @@
       }
 
       // 4. The API will call this function when the video player is ready.
-      var socket = io.connect("http://localhost:5000")
       function onPlayerReady(event) {
 
         event.target.playVideo();
         var buffer = document.getElementById("buffer")
         buffer.max = player.getDuration()
-        
+          
         MessageHandlingInit()
         pauseVideoInit()
         playVideoInit()
         bufferSeekInit()
+        
       }
 
       const MessageHandlingInit = function(){
 
         socket.on("play", () => {
-          player.playVideo()
+          player.playVideo();
         })
 
         socket.on("pause", () => {
@@ -90,6 +90,7 @@
         document.getElementById("playBtn").addEventListener("click", ev => {
           player.playVideo()
           socket.emit("play")
+          console.log("Play hit")
         })
       }
       const bufferSeekInit = function(){
